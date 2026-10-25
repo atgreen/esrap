@@ -1,0 +1,6 @@
+(require :asdf)
+(asdf:load-system "esrap")
+(esrap:defrule egcl-digits (+ (esrap:character-ranges (#\0 #\9))) (:text t))
+(assert (string= "123" (esrap:parse 'egcl-digits "123")))
+(assert (handler-case (progn (esrap:parse 'egcl-digits "x") nil) (esrap:esrap-error () t)))
+(format t "EGCL esrap smoke passed.~%")
